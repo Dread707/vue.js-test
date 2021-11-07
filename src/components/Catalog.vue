@@ -2,16 +2,17 @@
   <div class="catalog">
     <div class="post">
       <div v-if="loading" class="loading">
-        Загрузка...
+        Поиск проектов...
       </div>
     </div>
-
     <div class="ready" v-if="post">
-      <card-element
-          v-for="item in ELEMENTS.items"
-          :key="item.id"
-          :element_data="item"
-      />
+      <div class="catalog-ready">
+        <card-element
+            v-for="item in ELEMENTS.items"
+            :key="item.id"
+            :element_data="item"
+        />
+      </div>
       <div class="pagination-nav">
         <pagination></pagination>
       </div>
@@ -77,9 +78,26 @@ export default {
 </script>
 
 <style scoped>
-.catalog {
+
+.post, .ready {
+  width: 100%;
+}
+
+.catalog-ready {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  align-items: center;
+
+  color: #000000;
 }
 </style>

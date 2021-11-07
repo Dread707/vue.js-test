@@ -59,7 +59,7 @@ export default {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   margin-right: 0.5rem;
   margin-left: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .card-name {

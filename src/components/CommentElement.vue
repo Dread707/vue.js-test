@@ -16,7 +16,18 @@ export default {
     sendToComment() {
       this.emit('addComment')
     },
+  },
+  mounted() {
+    if (localStorage.comment) {
+      this.comment = localStorage.comment;
+    }
+  },
+  watch: {
+    name(comment) {
+      localStorage.comment = comment;
+    }
   }
+
 }
 </script>
 
