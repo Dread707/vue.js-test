@@ -1,58 +1,78 @@
 <template>
-<div class="catalog">
-  <card-element
-  v-for="item in items"
-  :key="item.id"
-  :element_data="item"
-  />
-</div>
+  <div class="catalog">
+    <div class="post">
+      <div v-if="loading" class="loading">
+        Загрузка...
+      </div>
+    </div>
+
+    <div class="ready" v-if="post">
+      <card-element
+          v-for="item in ELEMENTS.items"
+          :key="item.id"
+          :element_data="item"
+      />
+      <div class="pagination-nav">
+        <pagination></pagination>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 
 import CardElement from './CardElement.vue'
+import {mapActions, mapGetters} from 'vuex'
+import Pagination from "./Pagination";
+
 
 export default {
   name: 'Catalog',
   components: {
-    CardElement
-
+    CardElement,
+    Pagination
   },
-  props: {
-
-  },
+  props: {},
   data() {
     return {
-      items: [
-        {
-          id: "1",
-          name_git: "name 1",
-          author: "author 1",
-        },
-        {
-          id: "2",
-          name_git: "name 2",
-          author: "author 2",
-        },
-        {
-          id: "3",
-          name_git: "name 3",
-          author: "author 3",
-        },
-        {
-          id: "4",
-          name_git: "name 4",
-          author: "author 4",
-        },
-        {
-          id: "5",
-          name_git: "name 5",
-          author: "author 5",
-        },
-
-      ]
+      loading: false,
+      post: null,
+      error: null
     }
-  }
+  },
+  created() {
+    this.fetchData()
+  },
+  watch: {
+    $route: 'fetchData'
+  },
+
+  computed: {
+    ...mapGetters([
+      'ELEMENTS',
+      'SEARCH_VALUE'
+    ]),
+  },
+
+  methods: {
+    ...mapActions([
+      'SEARCH_ELEMENTS_FROM_API'
+    ]),
+    fetchData() {
+      this.error = this.post = null
+      this.loading = true
+      // замените `getPost` используемым методом получения данных / доступа к API
+      this.searchClick(this.value, (err, post) => {
+        this.loading = false
+        if (err) {
+          this.error = err.toString()
+        } else {
+          this.post = post
+        }
+      })
+    }
+
+  },
 }
 </script>
 

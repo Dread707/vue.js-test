@@ -1,22 +1,22 @@
 <template>
   <div class="card p-2">
     <div class="card-name my-2">
-      <p>{{ element_data.name_git }}</p>
+      <p>{{ element_data.name }}</p>
     </div>
     <div class="row">
       <div class="info-git col-12 mb-3">
-        <img class="info-git_img" src="@/assets/avatar.png">
-        <p class="info-git_author">{{ element_data.author }}</p>
+        <a :href="element_data.html_url"><img class="info-git_img"  :src="element_data.owner.avatar_url"></a>
+        <a class="info-git_author" :href="element_data.owner.html_url">{{ element_data.owner.login }}</a>
       </div>
       <div class="w-100"></div>
       <div class="rating-info-git">
         <div class="rating-info-git_star">
           <img src="@/assets/icons/star.png">
-          <p>123</p>
+          <p>{{ element_data.stargazers_count }}</p>
         </div>
         <div class="rating-info-git_glass">
           <img src="@/assets/icons/glass.png">
-          <p>123</p>
+          <p>{{ element_data.watchers_count }}</p>
         </div>
       </div>
     </div>
@@ -110,7 +110,7 @@ export default {
   height: 25px;
 }
 
-.rating-info-git_star p, .rating-info-git_glass p {
+.rating-info-git_star a, .rating-info-git_glass a {
   margin-left: 1rem;
   text-align: center;
   font-family: Roboto;
@@ -119,6 +119,19 @@ export default {
   font-size: 16px;
   color: #000000;
 }
+
+a:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #6c6c6c;
+  background-color: transparent;
+  text-decoration: none;
+}
+
 </style>
 
 <!-- :src="require(element_data.image)" -->

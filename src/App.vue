@@ -1,5 +1,5 @@
 <template>
-  <div id="search">
+  <div id="app">
     <div class="search-back">
       <search-element></search-element>
     </div>
@@ -13,11 +13,12 @@
 import Catalog from './components/Catalog.vue'
 import SearchElement from './components/SearchElement.vue'
 
+
 export default {
   name: 'App',
   components: {
     Catalog,
-    SearchElement
+    SearchElement,
   }
 }
 </script>
@@ -35,6 +36,11 @@ export default {
   align-items: center;
   margin-bottom: 2rem;
 
+}
+
+.pagination-nav {
+  display: flex;
+  justify-content: center;
 }
 
 

@@ -1,11 +1,9 @@
 <template>
   <div class="search-form container-fluid">
-    <form>
-      <input type="text" placeholder="Начните вводить текст для поиска (не менее трех символов)" v-model="searchValue">
-      <button class="submit">
-        <img class="search-form_icon" src="@/assets/icons/search.svg" @click="search(searchValue)">
-      </button>
-    </form>
+    <input type="text" v-model="searchValue" placeholder="Начните вводить текст для поиска (не менее трех символов)">
+    <button class="submit">
+      <img class="search-form_icon" src="@/assets/icons/search.svg" @click="searchClick(searchValue)">
+    </button>
   </div>
 </template>
 
@@ -17,7 +15,7 @@ export default {
   name: "SearchElement",
   data() {
     return {
-      searchValue: ''
+      searchValue: '',
     }
   },
   computed: {
@@ -27,10 +25,10 @@ export default {
   },
   methods: {
     ...mapActions([
-      'GET_SEARCH_VALUE_TO_VUEX',
+      'SEARCH_ELEMENTS_FROM_API',
     ]),
-    search(value) {
-      this.GET_SEARCH_VALUE_TO_VUEX(value);
+    searchClick(value) {
+      this.SEARCH_ELEMENTS_FROM_API(value)
 
     }
   },
