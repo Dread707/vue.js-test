@@ -5,7 +5,7 @@
         Поиск проектов...
       </div>
     </div>
-    <div class="ready" v-if="post">
+    <div class="ready"> <!-- v-if="post" -->
       <div class="catalog-ready">
         <card-element
             v-for="item in ELEMENTS.items"
